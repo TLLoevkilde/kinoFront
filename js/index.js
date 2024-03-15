@@ -48,16 +48,17 @@ function createCard(movie) {
     // Opret en knap
     const button = document.createElement('a');
     button.href = '#';
-    button.classList.add('btn', 'btn-primary', 'btn-bottom');
+    button.classList.add('btn', 'btn-primary');
     button.textContent = 'Ticket';
 
     // Tilføj billedet, titlen og knappen til card-body
     cardBodyDiv.appendChild(titleElement);
-    cardBodyDiv.appendChild(button);
+    //cardBodyDiv.appendChild(button);
 
     // Tilføj card-body til card-div
     cardDiv.appendChild(image);
     cardDiv.appendChild(cardBodyDiv);
+    cardDiv.appendChild(button)
 
     // Tilføj card-div til kolonne-div
     columnDiv.appendChild(cardDiv);
