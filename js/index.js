@@ -45,17 +45,28 @@ function createCard(movie) {
     titleElement.classList.add('card-title');
     titleElement.textContent = movie.title;
 
+    // Opret genre
+    const genreElement = document.createElement('h6')
+    genreElement.classList.add('card-subtitle', 'mb-2')
+    genreElement.textContent = movie.genre
+
+    // Opret duration
+    const durationElement = document.createElement('h6')
+    durationElement.classList.add('card-subtitle', 'text-muted', 'mb-2')
+    durationElement.textContent = movie.duration
+
     // Opret en knap
     const button = document.createElement('a');
     button.href = '#';
     button.classList.add('btn', 'btn-primary');
     button.textContent = 'Ticket';
 
-    // Tilføj billedet, titlen og knappen til card-body
+    // Tilføj til card-body
     cardBodyDiv.appendChild(titleElement);
-    //cardBodyDiv.appendChild(button);
+    cardBodyDiv.appendChild(genreElement)
+    cardBodyDiv.appendChild(durationElement)
 
-    // Tilføj card-body til card-div
+    // Tilføj til card-div
     cardDiv.appendChild(image);
     cardDiv.appendChild(cardBodyDiv);
     cardDiv.appendChild(button)
