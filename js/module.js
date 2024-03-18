@@ -1,7 +1,9 @@
+// READ
 function fetchAnyUrl(url) {
     return fetch(url).then(response => response.json())
 }
 
+// CREATE/UPDATE
 async function postFormDataAsJson(formData, url) {
     const plainFormData = Object.fromEntries(formData.entries())
     const resp = await restPost(url, plainFormData)
@@ -20,6 +22,7 @@ async function restPost(url, object) {
     return response
 }
 
+// DELETE
 async function restDelete(url) {
     const fetchOptions = {
         method: "DELETE",
