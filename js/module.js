@@ -6,11 +6,13 @@ function fetchAnyUrl(url) {
 // CREATE/UPDATE
 async function postFormDataAsJson(formData, url) {
     const plainFormData = Object.fromEntries(formData.entries())
+    console.log(plainFormData);
     const resp = await restPost(url, plainFormData)
 }
 
 async function restPost(url, object) {
     const objectAsJsonString = JSON.stringify(object)
+    console.log(objectAsJsonString);
     const fetchOptions = {
         method: "POST",
         headers: {

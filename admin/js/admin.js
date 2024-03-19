@@ -1,11 +1,11 @@
-import { fetchAnyUrl } from "../../js/module.js"
+import { fetchAnyUrl, postFormDataAsJson, restDelete } from "../../js/module.js"
 
-
+const urlMovies = "http://localhost:8080/movies"
 
 let movies = []
 fetchMovies()
 async function fetchMovies() {
-    movies = await fetchAnyUrl("http://localhost:8080/movies")
+    movies = await fetchAnyUrl(urlMovies)
     refreshTable()
 }
 
@@ -63,6 +63,7 @@ function createTableBody() {
         const deleteButton = document.createElement('button')
         deleteButton.classList.add('btn', 'btn-outline-danger', 'btn-sm', 'mb-4')
         deleteButton.textContent = 'Delete'
+        deleteButton.addEventListener('click', function () { deleteMovie(movie.movieId) })
 
         actionsCell.appendChild(editButton)
         actionsCell.appendChild(deleteButton)
@@ -95,4 +96,40 @@ function showModal(movie) {
     document.getElementById('btnSubmit').textContent = movie ? 'Edit' : 'Create'
 
     modal.show()
+}
+
+
+document.addEventListener('DOMContentLoaded', createFormEventListener)
+
+let movieForm;
+function createFormEventListener() {
+    movieForm = document.getElementById("movieForm");
+    console.log('CreateEventListener: ' + movieForm);
+    movieForm.addEventListener("submit", handleMovieForm);
+}
+
+async function handleMovieForm(event) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    console.log("handleMovieForm: " + form);
+    try {
+        const formData = new FormData(form);
+        const responseData = await postFormDataAsJson(formData, urlMovies);
+    } catch (error) {
+        alert(error.message);
+    }
+}
+
+// Delete
+async function deleteMovie(movieId) {
+    try {
+        const url = urlMovies + "/" + movieId
+        const resp = await restDelete(url)
+        const body = await resp.text();
+        alert(body)
+        fetchMovies()
+    } catch (error) {
+        alert(error.message);
+        console.log(error);
+    }
 }
