@@ -2,6 +2,7 @@ import { fetchAnyUrl, postFormDataAsJson, restDelete } from "../../js/module.js"
 
 const urlMovies = "http://localhost:8080/movies"
 
+// GET
 let movies = []
 fetchMovies()
 async function fetchMovies() {
@@ -9,6 +10,7 @@ async function fetchMovies() {
     refreshTable()
 }
 
+// Table
 function refreshTable() {
     clearTableBody()
     createTableBody()
@@ -58,12 +60,12 @@ function createTableBody() {
         const editButton = document.createElement('button')
         editButton.classList.add('btn', 'btn-outline-success', 'btn-sm', 'mb-3', 'mt-4')
         editButton.textContent = 'Edit'
-        editButton.addEventListener('click', function () { showModal(movie) })
+        editButton.addEventListener('click', function () { showMovieModal(movie) })
 
         const deleteButton = document.createElement('button')
         deleteButton.classList.add('btn', 'btn-outline-danger', 'btn-sm', 'mb-4')
         deleteButton.textContent = 'Delete'
-        deleteButton.addEventListener('click', function () { deleteMovie(movie.movieId) })
+        deleteButton.addEventListener('click', function () { deleteMovie(movie) })
 
         actionsCell.appendChild(editButton)
         actionsCell.appendChild(deleteButton)
@@ -74,15 +76,16 @@ function createTableBody() {
 }
 
 
-// Create Movie
-document.getElementById('btnCreate').addEventListener('click', function () { showModal(null) });
+// POST
 
-
-function showModal(movie) {
+function showMovieModal(movie) {
     const modal = new bootstrap.Modal(document.getElementById('movieModal'))
 
     // Header
     document.getElementById('modalTitle').textContent = movie ? 'Edit movie' : 'Create movie'
+
+    // Set movieId value
+    if (movie) { document.getElementById('movieId').value = movie.movieId; }
 
     // Input fields
     document.getElementById('title').value = movie ? movie.title : ''
@@ -93,43 +96,47 @@ function showModal(movie) {
     document.getElementById('imageUrl').value = movie ? movie.imageUrl : ''
 
     // Footer
-    document.getElementById('btnSubmit').textContent = movie ? 'Edit' : 'Create'
+    document.getElementById('btnSubmit').textContent = movie ? 'Save' : 'Create'
 
     modal.show()
 }
 
+document.getElementById('btnCreate').addEventListener('click', function () {
+    showMovieModal(null) // Create button is handled here. Edit button is handled in createTable()
+});
 
 document.addEventListener('DOMContentLoaded', createFormEventListener)
 
 let movieForm;
 function createFormEventListener() {
     movieForm = document.getElementById("movieForm");
-    console.log('CreateEventListener: ' + movieForm);
     movieForm.addEventListener("submit", handleMovieForm);
 }
 
 async function handleMovieForm(event) {
     event.preventDefault();
     const form = event.currentTarget;
-    console.log("handleMovieForm: " + form);
     try {
         const formData = new FormData(form);
         const responseData = await postFormDataAsJson(formData, urlMovies);
+        alert('Successfully saved')
+        fetchMovies()
     } catch (error) {
         alert(error.message);
     }
 }
 
-// Delete
-async function deleteMovie(movieId) {
+// DELETE
+async function deleteMovie(movie) {
     try {
-        const url = urlMovies + "/" + movieId
-        const resp = await restDelete(url)
-        const body = await resp.text();
-        alert(body)
-        fetchMovies()
+        const confirmed = confirm(`Are you sure you want to delete '${movie.title}'`);
+        if (confirmed) {
+            const url = urlMovies + "/" + movie.movieId;
+            const resp = await restDelete(url);
+            alert(`'${movie.title}' was successfully deleted`);
+            fetchMovies();
+        }
     } catch (error) {
         alert(error.message);
-        console.log(error);
     }
 }
