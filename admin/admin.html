@@ -25,7 +25,14 @@
         <div class="container-lg">
             <div class="text-center mb-4">
                 <h2>Movies</h2>
-                <button id="btnCreate" class="btn btn-success btn-sm">Create movie</button>
+                <div class="d-flex justify-content-evenly align-items-center">
+                    <form class="form-inline form-inline-sm d-flex gap-2">
+                        <input class="form-control" type="search" id="searchMovie" placeholder="Search"
+                            aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit" id="searchSubmit">Search</button>
+                    </form>
+                    <button id="btnCreate" class="btn btn-success">Create movie</button>
+                </div>
             </div>
 
             <div class="container mx-auto">

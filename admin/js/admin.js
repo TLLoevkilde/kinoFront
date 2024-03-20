@@ -140,3 +140,28 @@ async function deleteMovie(movie) {
         alert(error.message);
     }
 }
+
+// SEARCH
+document.getElementById('searchSubmit').addEventListener('click', function (event) {
+    event.preventDefault(); // Forhindrer standardformularadfærd
+    searchMovie();
+});
+
+const searchInput = document.getElementById('searchMovie');
+searchInput.addEventListener('input', function () {
+    const searchMovieTitle = this.value.trim();
+    if (searchMovieTitle === '') {
+        fetchMovies();
+    }
+});
+
+async function searchMovie() {
+    const searchMovieTitle = document.getElementById('searchMovie').value.trim().toLowerCase();
+    if (searchMovieTitle) {
+        const filteredMovies = movies.filter(movie => movie.title.toLowerCase().includes(searchMovieTitle));
+        movies = filteredMovies;
+        refreshTable();
+    } else {
+        fetchMovies();
+    }
+}
