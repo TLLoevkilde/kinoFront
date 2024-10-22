@@ -1,6 +1,7 @@
 # KinoFront
 
-KinoFront is the frontend component of the Kino application, developed using HTML, CSS, and JavaScript. This interface allows users to view movie details, search for movies, and manage movie data through an admin panel.
+KinoFront is the frontend component of the Kino application (see KinoBack for backend), developed using HTML, CSS, and JavaScript. This interface allows users to view movie details, search for movies, and manage movie data through an admin panel.
+
 
 **Note:** This project is currently a work in progress. More features and updates will be added over time.
 
