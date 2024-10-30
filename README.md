@@ -10,8 +10,6 @@ KinoFront is the frontend component of the Kino application (see KinoBack for ba
   - Users can view a list of movies with detailed information.
 - **Search Functionality:** 
   - Users can search for movies by title.
-- **Responsive Design:** 
-  - Mobile-friendly design for easy access on various devices.
 - **Dynamic Content Loading:** 
   - Fetches movie data from the KinoBack API in real-time.
 
