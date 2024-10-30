@@ -28,10 +28,6 @@ KinoFront is the frontend component of the Kino application (see KinoBack for ba
 - **Bootstrap:** CSS framework for responsive design.
 - **Fetch API:** For making HTTP requests to the backend.
 
-## Prerequisites
-- A modern web browser (Chrome, Firefox, Safari, etc.)
-- Local server setup (e.g., XAMPP, WAMP, or a simple HTTP server)
-
 ## Installation
 1. Clone the repository:
    ```bash
