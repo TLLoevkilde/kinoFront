@@ -8,16 +8,19 @@ KinoFront is the frontend component of the Kino application (see KinoBack for ba
 ## Current Features
 - **Movie Listings:** 
   - Users can view a list of movies with detailed information.
-- **Search Functionality:** 
-  - Users can search for movies by title.
-- **Dynamic Content Loading:** 
-  - Fetches movie data from the KinoBack API in real-time.
-
-## Features to Come
-- **Admin Panel:** 
-  - An interface for admins to manage movies, including adding, editing, and deleting entries.
 - **Modal Pop-ups:** 
   - Enhanced user experience with modal windows for movie details and actions.
+- **Dynamic Content Loading:** 
+  - Fetches movie data from the KinoBack API in real-time.
+- **Admin Panel:** 
+  - An interface for admins to manage movies, including adding, editing, and deleting entries.
+- **Search Functionality:** 
+  - Admin can search for movies by title.
+
+
+## Features to Come
+- **Admin Login:** 
+  - Only admin can access the admin page.
 
 ## Technologies Used
 - **HTML/CSS:** For structuring and styling the web pages.
